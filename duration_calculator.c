@@ -48,7 +48,7 @@ int main() {
   scanf("%d %d %d", &year1, &month1, &day1);
 
   // Prompt the user for the second date
-  printf("Enter the second date (YYYY MM DD): ");
+  printf("Enter The Second Date (YYYY MM DD): ");
   scanf("%d %d %d", &year2, &month2, &day2);
 
   // Calculate the number of years, months, and days between the two dates
