@@ -1,5 +1,6 @@
 import tweepy
 from textblob import TextBlob
+import xlsxwriter
 
 # Enter your Twitter API keys here
 consumer_key = ""
@@ -46,12 +47,25 @@ for tweet in tweets:
         else:
             accounts[mention] = 1
 
-# Print the trends
-print("Trends:")
-for trend, count in trends.items():
-    print(f"{trend}: {count}")
+# Create an Excel file and write the results to it
+workbook = xlsxwriter.Workbook("tweet_results.xlsx")
+worksheet = workbook.add_worksheet()
 
-# Print the most interactive accounts
-print("\nMost interactive accounts:")
+# Write the trends to the first column
+worksheet.write("A1", "Trends")
+row = 1
+col = 0
+for trend, count in trends.items():
+    worksheet.write(row, col, f"{trend}: {count}")
+    row += 1
+
+# Write the most interactive accounts to the second column
+worksheet.write("B1", "Most interactive accounts")
+row = 1
+col = 1
 for account, count in accounts.items():
-    print(f"{account}: {count}")
+    worksheet.write(row, col, f"{account}: {count}")
+    row += 1
+
+# Save the Excel file
+workbook.close()
